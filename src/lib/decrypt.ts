@@ -1,4 +1,4 @@
-import crypto from 'crypto';
+import crypto from 'node:crypto';
 import type {trackType} from '../types';
 
 const md5 = (data: string, type: crypto.Encoding = 'ascii') => {

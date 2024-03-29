@@ -7,7 +7,6 @@ import {
   getPlaylistTracks,
   getTrackInfo,
 } from '../';
-import spotifyUri from 'spotify-uri';
 import axios from 'axios';
 import * as spotify from './spotify';
 import * as tidal from './tidal';
@@ -57,13 +56,6 @@ export const getUrlParts = async (url: string, setToken = false): Promise<urlPar
       }
       const deezerUrlParts = url.split(/\/(\w+)\/(\d+)/);
       return {type: deezerUrlParts[1] as any, id: deezerUrlParts[2]};
-
-    case 'spotify':
-      const spotifyUrlParts = spotifyUri.parse(url);
-      if (setToken) {
-        await spotify.setSpotifyAnonymousToken();
-      }
-      return {type: ('spotify-' + spotifyUrlParts.type) as any, id: (spotifyUrlParts as any).id};
 
     case 'tidal':
       const tidalUrlParts = url.split(/\/(\w+)\/(\d+|\w+-\w+-\w+-\w+-\w+)/);
